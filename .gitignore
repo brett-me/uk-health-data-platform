@@ -1,0 +1,10 @@
+# Local raw source data - tracked via source inventory, not git
+data/raw/*
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Environment
+.env
