@@ -1,8 +1,8 @@
 # UK Health Data Platform
 
-A local-first batch data platform that ingests and standardises multiple UK public health
-and population sources to produce validated, period-based datasets suitable for operational
-and analytical use.
+A local-first batch data platform that ingests, validates, and standardises multiple UK 
+public health and population sources to give analysts clean, reconciled inputs for 
+assessing primary care access pressure across English geographies.
 
 Built as a companion platform to [batch-data-platform](https://github.com/brett-me/batch-data-platform).
 Same engineering backbone, real-source complexity.
@@ -10,11 +10,13 @@ Same engineering backbone, real-source complexity.
 ## What this platform does
 
 Ingests from three public sources:
-- NHS England operational statistics (monthly)
-- ONS population and geography reference data (annual)
-- OHID / Fingertips public health indicators (varies)
+- NHS England operational statistics — GP appointments and primary care activity (monthly)
+- ONS population and geography reference data — population estimates by geography (annual)
+- OHID / Fingertips indicators — deprivation and access indicators by geography (varies)
 
-Produces validated, period-based, reconciled datasets with full provenance tracking.
+Produces validated, period-based, geographically-reconciled datasets that give analysts 
+reliable inputs for assessing whether primary care capacity is keeping pace with population 
+demand across English geographies.
 
 ## Quickstart
 
