@@ -20,15 +20,13 @@ validation logic will eventually enforce.
 |---|---|
 | Publisher | NHS England (digital.nhs.uk) |
 | Domain | GP appointment activity by practice, PCN, and ICB |
-| URL | https://digital.nhs.uk/data-and-information/publications/statistical/appointments-in-general-practice |
-| Format | CSV (practice-level summary + daily counts) |
-| Cadence | Monthly |
-| Typical lag | ~6 weeks after reference month |
-| Geographic grain | GP Practice → PCN → ICB sub-location → ICB → NHS Region |
-| Key fields | appointment counts, attendance status, HCP type, mode, booking lead time |
-| Business key | TBD — to be confirmed on first file inspection (likely PRACTICE_CODE + appointment_month) |
-| Known quirks | Coverage is ~99% of practices, not 100%. COVID vaccination activity removed from Dec 2020 onwards. HCP Type being phased out in favour of SDS Role Groups. Schema has changed over time. |
-| First downloaded | Not yet |
+| URL | https://digital.nhs.uk/data-and-information/publications/statistical/appointments-in-general-practice | Format | CSV |
+| Files | Practice_Level_Crosstab_Dec_25.csv (fact), Mapping.csv (geography reference) |
+| Geographic grain | GP Practice → PCN → Sub-ICB → ICB → Region (full hierarchy in Mapping.csv) |
+| Key fields | APPOINTMENT_MONTH_START_DATE, GP_CODE, HCP_TYPE, APPT_MODE, NATIONAL_CATEGORY, TIME_BETWEEN_BOOK_AND_APPT, APPT_STATUS, COUNT_OF_APPOINTMENTS |
+| Business key | GP_CODE + APPOINTMENT_MONTH_START_DATE + HCP_TYPE + APPT_MODE + NATIONAL_CATEGORY + TIME_BETWEEN_BOOK_AND_APPT + APPT_STATUS |
+| Known quirks | Date format is 01DEC2025 — needs parsing in staging. Geography hierarchy requires join to Mapping.csv to reach ICB level for ONS join. 185MB file — largest source by volume. |
+| First downloaded | 2026-03-10 |
 
 ---
 
@@ -39,13 +37,13 @@ validation logic will eventually enforce.
 | Publisher | Office for National Statistics |
 | Domain | Mid-year resident population estimates by ICB and sub-ICB geography |
 | URL | https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/clinicalcommissioninggroupmidyearpopulationestimates |
-| Format | CSV / Excel (zipped) |
-| Cadence | Annual (mid-year, published ~12 months after reference date) |
-| Geographic grain | ICB (formerly CCG) — aligns to NHS appointment geography |
-| Key fields | population estimates by age band and sex, ICB code |
-| Business key | TBD — likely ICB code + reference year |
-| Known quirks | Geography codes change on 1 April each year as NHS restructures. CCG → ICB transition in 2022 means historical files use different codes. Must handle code mapping carefully. |
-| First downloaded | Not yet |
+| Format | CSV |
+| Files | Practice_Level_Crosstab_Dec_25.csv (fact), Mapping.csv (geography reference) |
+| Geographic grain | GP Practice → PCN → Sub-ICB → ICB → Region (full hierarchy in Mapping.csv) |
+| Key fields | APPOINTMENT_MONTH_START_DATE, GP_CODE, HCP_TYPE, APPT_MODE, NATIONAL_CATEGORY, TIME_BETWEEN_BOOK_AND_APPT, APPT_STATUS, COUNT_OF_APPOINTMENTS |
+| Business key | GP_CODE + APPOINTMENT_MONTH_START_DATE + HCP_TYPE + APPT_MODE + NATIONAL_CATEGORY + TIME_BETWEEN_BOOK_AND_APPT + APPT_STATUS |
+| Known quirks | Date format is 01DEC2025 — needs parsing in staging. Geography hierarchy requires join to Mapping.csv to reach ICB level for ONS join. 185MB file — largest source by volume. |
+| First downloaded | 2026-03-10 |
 
 ---
 
