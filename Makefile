@@ -26,6 +26,10 @@ status:
 	@echo "==> Checking container status"
 	docker compose ps
 
+smoke:
+	@echo "==> Running smoke check"
+	$(ENV_RUN) python3 scripts/smoke.py
+
 down:
 	@echo "==> Stopping local platform"
 	docker compose down
